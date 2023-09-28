@@ -71,17 +71,41 @@ class MenuOlimpiadas:
                     cont += 1
                     if linea[0] not in deportistas:
                         deportistas.append({"nombre": linea[1], "Evento": linea[13], "Medalla": linea[14]})
-                        print("La edicion olimpica ,", linea[8], linea[11], "el deporte:", linea[12])
-                    else:
-                        for deportista in deportistas:
-                            print(deportista)
+                        print("La edicion olimpica ,", linea[8], "en la ciudad de", linea[11], "el deporte:", linea[12])
                 #print(type(deportistas)) formato lista
-            print("hay :", cont)
-    #def aniadirDeportista(self):
+            if cont == 0:
+                print("Deportista no existe")
+            else:
+                print(deportistas)
+                print("hay :", cont)
 
-
-
-
-
+#"ID","Name","Sex","Age","Height","Weight","Team","NOC","Games","Year","Season","City","Sport","Event","Medal"
+    def aniadirDeportista(self):
+        id = input("Introduce id: ")
+        name = input("Introduce nombre: ")
+        sex = input("Introduce el sexo: ")
+        age = input("Introduce la edad: ")
+        height = input("Introduce la altura: ")
+        weight = input("Introduce peso: ")
+        team = input("Introduce el equipo: ")
+        noc = input("Introduce noc: ")
+        games = input("Introduce juegos: ")
+        year = input("Introduce el año: ")
+        season = input("Introduce la temporada: ")
+        city = input("Introduce la ciudad: ")
+        sport = input("Introduce el deporte: ")
+        event = input("Introduce el evento: ")
+        medal = input("Introduce la medalla: ")
+        nueva_linea = [id, name, sex, age, height, weight, team, noc, games, year, season, city, sport, event, medal]
+        fichero = "athlete_events.csv"
+        with open(fichero, "a") as csvFile: #mode "a" es para modificar
+            try:
+                writer = csv.writer(csvFile)
+                writer.writerow(nueva_linea)
+                writer.__delattr__()
+                print("Fila agregada exitosamente ")
+            except Exception as e:
+                print("Ha ocurrido un error al añadir la nueva fila", e)
+# luego tengo q pensar en el metodo de eliminar la linea añadida
 M1 = MenuOlimpiadas()
-M1.buscarPorDeporteOlimpiada()
+M1.aniadirDeportista()
